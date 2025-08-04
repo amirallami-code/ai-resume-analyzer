@@ -16,6 +16,7 @@ const Upload = () => {
     const [status, setStatus] = useState(0);
 
     const handleFileSelect = (file: File | null) => {
+        console.log('handleFileSelect called with:', file);
         setFile(file)
     }
 
@@ -111,7 +112,7 @@ const Upload = () => {
 
                             <div className="form-div">
                                 <label htmlFor="uploader">Upload Resume</label>
-                                <FileUploader onFileSelect={handleFileSelect} />
+                                <FileUploader onFileSelect={handleFileSelect} file={file} />
                             </div>
 
                             <button className="primary-button" type="submit">

@@ -4,9 +4,10 @@ import { formatSize } from '~/lib/utils'
 
 interface FileUploaderProps {
     onFileSelect?: (file: File | null) => void;
+    file?: File | null;
 }
 
-const FileUploader = ( {onFileSelect}: FileUploaderProps) => {
+const FileUploader = ( {onFileSelect, file: propFile}: FileUploaderProps) => {
 
     const onDrop = useCallback((acceptedFiles : File[]) => {
         const file = acceptedFiles[0] || null;
@@ -16,14 +17,14 @@ const FileUploader = ( {onFileSelect}: FileUploaderProps) => {
 
     const maxFileSize = 20 * 1024 * 1024;
 
-    const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
+    const {getRootProps, getInputProps, isDragActive, acceptedFiles, fileRejections, inputRef} = useDropzone({
         onDrop,
         multiple: false,
         accept: {'application/pdf': ['.pdf']},
         maxSize: maxFileSize,
     })
 
-    const file = acceptedFiles[0] || null;
+    const file = propFile !== undefined ? propFile : (acceptedFiles[0] || null);
 
     return (
         <div className="w-full gradient-border">
@@ -46,9 +47,19 @@ const FileUploader = ( {onFileSelect}: FileUploaderProps) => {
                                 </div>
                             </div>
                             <div className="flex items-center justify-center min-w-fit">
-                                <button className="p-2 cursor-pointer" onClick={() => {
-                                    onFileSelect?.(file);
-                                }}>
+                                <button
+                                    className="p-2 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        console.log('Remove button clicked');
+                                        // Clear the input value to reset dropzone
+                                        if (inputRef.current) {
+                                            inputRef.current.value = '';
+                                        }
+                                        onFileSelect?.(null);
+                                    }}
+                                >
                                     <img src="/icons/cross.svg" alt="Remove" className="w-4 h-4" />
                                 </button>
                             </div>
