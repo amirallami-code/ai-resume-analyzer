@@ -28,11 +28,11 @@ main {
   @apply min-h-screen pt-10;
 }
 h1 {
-  @apply max-sm:text-4xl text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
+  @apply max-sm:text-3xl text-5xl lg:text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
 }
 
 h2 {
-  @apply  max-sm:text-xl text-3xl text-dark-200;
+  @apply max-sm:text-lg text-2xl text-dark-200;
 }
 
 label {
@@ -57,6 +57,18 @@ form {
   .gradient-border {
     @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 px-5 py-6 rounded-3xl;
   }
+  .requiredInput {
+    @apply relative;
+  }
+  .requiredInput:after {
+    @apply absolute content-['*'] h-full w-4 text-2xl my-auto text-red-600;
+  }
+  .progress-bar {
+    @apply w-full max-w-48 bg-gray-200 rounded-full h-2 dark:bg-gray-200 animate-in fade-in;
+  }
+  .progress-bar > div {
+    @apply bg-[#606beb] h-2 rounded-full duration-1000;
+  }
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
   }
@@ -73,24 +85,24 @@ form {
     @apply flex flex-row items-center gap-2 border border-gray-200 rounded-lg p-2 shadow-sm;
   }
   .auth-button {
-    @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-[600px] max-md:w-full text-3xl font-semibold text-white;
+    @apply primary-gradient rounded-full py-2 md:py-4 px-4 md:px-8 cursor-pointer w-[600px] max-md:w-full text-lg md:text-3xl font-semibold text-white;
   }
   .main-section {
-    @apply flex flex-col items-center gap-8 pt-12 max-sm:mx-4 mx-15 pb-5;
+    @apply flex flex-col items-center gap-8 pt-8 md:pt-12 max-sm:mx-4 mx-15 pb-5;
   }
   .page-heading {
-    @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4;
+    @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4 py-1 md:py-6;
   }
   .resumes-section {
-    @apply flex flex-wrap max-md:flex-col max-md:gap-4 gap-6 items-start max-md:items-center w-full max-w-[1850px] justify-evenly;
+    @apply flex flex-wrap max-md:flex-col max-md:gap-4 gap-8 items-start max-md:items-center w-full max-w-[1250px] justify-evenly;
   }
 
   .resume-card {
-    @apply flex flex-col gap-8 h-[560px] w-[350px] lg:w-[430px] xl:w-[490px] bg-white rounded-2xl p-4;
+    @apply flex flex-col gap-8 h-auto w-full max-w-sm bg-white rounded-3xl p-5;
   }
 
   .resume-card-header {
-    @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
+    @apply flex flex-row w-full gap-2 justify-between;
   }
 
   .feedback-section {
@@ -98,7 +110,7 @@ form {
   }
 
   .navbar {
-    @apply sticky top-5 z-10 flex flex-row flex-wrap justify-between items-center border-2 border-gray-100/75 shadow bg-white rounded-full p-3 px-4 w-11/12 max-w-[950px] mx-auto;
+    @apply sticky top-5 z-10 flex flex-row flex-wrap justify-between items-center border-2 border-gray-100/75 shadow bg-white rounded-full p-3 px-4 w-11/12 max-w-[900px] mx-auto;
   }
 
   .score-badge {

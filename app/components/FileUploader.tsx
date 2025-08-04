@@ -27,8 +27,8 @@ const FileUploader = ( {onFileSelect, file: propFile}: FileUploaderProps) => {
     const file = propFile !== undefined ? propFile : (acceptedFiles[0] || null);
 
     return (
-        <div className="w-full gradient-border">
-            <div {...getRootProps()}>
+        <div className="w-full gradient-border !p-3">
+            <div {...getRootProps()} className="bg-white/50 rounded-2xl">
                 <input {...getInputProps()} />
 
                 <div className="space-y-4 cursor-pointer">
@@ -65,7 +65,7 @@ const FileUploader = ( {onFileSelect, file: propFile}: FileUploaderProps) => {
                             </div>
                         </div>
                     ) : (
-                        <div className="text-sm md:text-lg text-gray-500">
+                        <div className="text-sm md:text-lg text-gray-500 py-10">
                             <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
                                 <img src="/icons/info.png" alt="Upload" className="size-12 md:size-16" />
                             </div>

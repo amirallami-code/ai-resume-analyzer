@@ -4,7 +4,7 @@ import FileUploader from "~/components/FileUploader";
 import {usePuterStore} from "~/lib/puter";
 import {useNavigate} from "react-router";
 import {convertPdfToImage} from "~/lib/pdfToImage";
-import {generateUUID} from "~/lib/utils";
+import {formatSize, generateUUID} from "~/lib/utils";
 import {prepareInstructions} from "../../constants";
 
 const Upload = () => {
@@ -13,7 +13,7 @@ const Upload = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [statusText, setStatusText] = useState('');
     const [file, setFile] = useState<File | null>(null);
-    const [status, setStatus] = useState(0);
+    const [loadingStatus, setLoadingStatus] = useState(0);
 
     const handleFileSelect = (file: File | null) => {
         console.log('handleFileSelect called with:', file);
@@ -23,18 +23,25 @@ const Upload = () => {
     const handleAnalyze = async ({ companyName, jobTitle, jobDescription, file }: { companyName: string, jobTitle: string, jobDescription: string, file: File  }) => {
         setIsProcessing(true);
 
+        // Stage 1
         setStatusText('Uploading the file...');
         const uploadedFile = await fs.upload([file]);
         if(!uploadedFile) return setStatusText('Error: Failed to upload file');
+        setLoadingStatus(15);
 
+        // Stage 2
         setStatusText('Converting to image...');
         const imageFile = await convertPdfToImage(file);
         if(!imageFile.file) return setStatusText('Error: Failed to convert image.');
+        setLoadingStatus(30);
 
+        // Stage 3
         setStatusText('Uploading the image...');
         const uploadedImage = await fs.upload([imageFile.file]);
         if(!uploadedImage) return setStatusText('Error: Failed to upload image');
+        setLoadingStatus(45);
 
+        // Stage 4
         setStatusText('Preparing data...');
         const uuid = generateUUID();
         const data = {
@@ -45,9 +52,10 @@ const Upload = () => {
             feedback: '',
         }
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
+        setLoadingStatus(60);
 
+        // Stage 5
         setStatusText('Analyzing...');
-
         const feedback = await ai.feedback(
             uploadedFile.path,
             prepareInstructions({ jobTitle, jobDescription })
@@ -60,9 +68,13 @@ const Upload = () => {
 
         data.feedback = JSON.parse(feedbackText);
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
+        setLoadingStatus(75);
+
+        // Stage 6
         setStatusText('Analysis complete, redirecting...');
+        setLoadingStatus(100);
         console.log(data);
-        navigate(`/resume/${uuid}`);
+        // navigate(`/resume/${uuid}`);
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -85,25 +97,28 @@ const Upload = () => {
             <Navbar />
 
             <section className="main-section">
-                <div className="page-heading py-3">
+                <div className="page-heading">
                     <h1>Smart feedback for your dream job</h1>
                     {isProcessing ? (
                         <>
                             <h2>{statusText}</h2>
-                            <img src="/images/resume-scan.gif" className="w-full" />
+                            <div className="progress-bar">
+                                <div style={{ width: `${loadingStatus}%` }}></div>
+                            </div>
+                            <img src="/images/resume-scan.gif" className="w-full md:max-w-48"/>
                         </>
                     ) : (
                         <h2>Drop your resume for an ATS score and improvement tips</h2>
                     )}
                     {!isProcessing && (
-                        <form id="upload-form" onSubmit={handleSubmit} className="flex flex-col gap-4 mt-8">
+                        <form id="upload-form" onSubmit={handleSubmit} className="flex flex-col gap-4 mt-8 max-w-3xl">
                             <div className="form-div">
                                 <label htmlFor="company-name">Company Name</label>
                                 <input type="text" name="company-name" placeholder="Company Name" id="company-name" />
                             </div>
                             <div className="form-div">
-                                <label htmlFor="job-title">Job Title</label>
-                                <input type="text" name="job-title" placeholder="Job Title" id="job-title" />
+                                <label htmlFor="job-title" className="requiredInput">Job Title</label>
+                                <input type="text" name="job-title" placeholder="Job Title" id="job-title" required={true}/>
                             </div>
                             <div className="form-div">
                                 <label htmlFor="job-description">Job Description</label>
@@ -115,7 +130,7 @@ const Upload = () => {
                                 <FileUploader onFileSelect={handleFileSelect} file={file} />
                             </div>
 
-                            <button className="primary-button" type="submit">
+                            <button className="primary-button py-3 !rounded-2xl" type="submit">
                                 Analyze Resume
                             </button>
                         </form>
