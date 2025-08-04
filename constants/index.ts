@@ -184,6 +184,8 @@ export const resumes: Resume[] = [
 export const AIResponseFormat = `
       interface Feedback {
       overallScore: number; //max 100
+      jobTitle: string;
+      jobDescription: string;
       ATS: {
         score: number; //rate based on ATS suitability
         tips: {

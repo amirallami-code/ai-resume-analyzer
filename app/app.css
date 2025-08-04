@@ -28,11 +28,11 @@ main {
   @apply min-h-screen pt-10;
 }
 h1 {
-  @apply max-sm:text-[3rem] text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
+  @apply max-sm:text-4xl text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
 }
 
 h2 {
-  @apply max-sm:text-xl text-3xl text-dark-200;
+  @apply  max-sm:text-xl text-3xl text-dark-200;
 }
 
 label {
@@ -55,7 +55,7 @@ form {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
   }
   .gradient-border {
-    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
+    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 px-5 py-6 rounded-3xl;
   }
   .primary-button {
     @apply primary-gradient text-white rounded-full px-4 py-2 cursor-pointer w-full;
@@ -76,7 +76,7 @@ form {
     @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-[600px] max-md:w-full text-3xl font-semibold text-white;
   }
   .main-section {
-    @apply flex flex-col items-center gap-8 pt-12 max-sm:mx-2 mx-15 pb-5;
+    @apply flex flex-col items-center gap-8 pt-12 max-sm:mx-4 mx-15 pb-5;
   }
   .page-heading {
     @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4;
@@ -98,7 +98,7 @@ form {
   }
 
   .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 px-5 w-11/12 max-w-[1000px] mx-auto;
+    @apply sticky top-5 z-10 flex flex-row flex-wrap justify-between items-center border-2 border-gray-100/75 shadow bg-white rounded-full p-3 px-4 w-11/12 max-w-[950px] mx-auto;
   }
 
   .score-badge {
@@ -113,7 +113,7 @@ form {
     @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-[208px];
   }
   .uploader-selected-file {
-    @apply flex items-center justify-between p-3 bg-gray-50 rounded-2xl;
+    @apply flex items-center justify-between gap-2 p-3 bg-gray-50 rounded-2xl;
   }
 }
 
@@ -150,4 +150,9 @@ form {
   to {
     opacity: 1;
   }
+}
+
+
+.loader {
+  @apply w-6 h-6 inline-block animate-spin repeat-infinite border-3 border-gray-200 border-t-light-blue-100 rounded-full;
 }

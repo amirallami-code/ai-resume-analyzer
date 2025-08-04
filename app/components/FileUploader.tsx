@@ -34,34 +34,36 @@ const FileUploader = ( {onFileSelect}: FileUploaderProps) => {
 
                     {file ? (
                         <div className="uploader-selected-file" onClick={(e) => e.stopPropagation()}>
-                            <img src="/images/pdf.png" alt="PDF" className="size-10" />
-                            <div className="flex items-center space-x-3">
-                                <div>
-                                    <p className="text-sm text-gray-700 font-medium truncate max-w-xl">
+                            <div className="flex items-center justify-start space-x-3">
+                                <img src="/images/pdf.png" alt="PDF" className="size-10" />
+                                <div className="relative flex flex-col items-start justify-center gap-1 text-start overflow-hidden">
+                                    <p className="relative text-sm text-gray-700 font-medium">
                                         {file.name}
                                     </p>
-                                    <p className="text-sm text-gray-500">
+                                    <p className="text-xs text-gray-500 text-start">
                                         {formatSize(file.size)}
                                     </p>
                                 </div>
                             </div>
-                            <button className="p-2 cursor-pointer" onClick={() => {
-                                onFileSelect?.(file);
-                            }}>
-                                <img src="/icons/cross.svg" alt="Remove" className="w-4 h-4" />
-                            </button>
+                            <div className="flex items-center justify-center min-w-fit">
+                                <button className="p-2 cursor-pointer" onClick={() => {
+                                    onFileSelect?.(file);
+                                }}>
+                                    <img src="/icons/cross.svg" alt="Remove" className="w-4 h-4" />
+                                </button>
+                            </div>
                         </div>
                     ) : (
-                        <div>
+                        <div className="text-sm md:text-lg text-gray-500">
                             <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
-                                <img src="/icons/info.png" alt="Upload" className="size-16" />
+                                <img src="/icons/info.png" alt="Upload" className="size-12 md:size-16" />
                             </div>
-                            <p className="text-lg text-gray-500">
+                            <p>
                                 <span className="font-semibold">
                                     Click to upload
                                 </span> or drag and drop
                             </p>
-                            <p className="text-lg text-gray-500">PDF (max {formatSize(maxFileSize)})</p>
+                            <p>PDF (max {formatSize(maxFileSize)})</p>
                         </div>
                     )}
 

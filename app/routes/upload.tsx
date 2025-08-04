@@ -13,6 +13,7 @@ const Upload = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [statusText, setStatusText] = useState('');
     const [file, setFile] = useState<File | null>(null);
+    const [status, setStatus] = useState(0);
 
     const handleFileSelect = (file: File | null) => {
         setFile(file)
@@ -60,6 +61,7 @@ const Upload = () => {
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
         setStatusText('Analysis complete, redirecting...');
         console.log(data);
+        navigate(`/resume/${uuid}`);
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -82,7 +84,7 @@ const Upload = () => {
             <Navbar />
 
             <section className="main-section">
-                <div className="page-heading py-16">
+                <div className="page-heading py-3">
                     <h1>Smart feedback for your dream job</h1>
                     {isProcessing ? (
                         <>
