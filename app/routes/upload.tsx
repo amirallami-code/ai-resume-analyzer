@@ -21,7 +21,6 @@ const Upload = () => {
     const [loadingStatus, setLoadingStatus] = useState(0);
 
     const handleFileSelect = (file: File | null) => {
-        console.log('handleFileSelect called with:', file);
         setFile(file)
     }
 
@@ -78,7 +77,6 @@ const Upload = () => {
         // Stage 6
         setStatusText('Redirecting...');
         setLoadingStatus(100);
-        console.log(data);
         navigate(`/resume/${uuid}`);
     }
 

@@ -7,6 +7,9 @@ export const resumes: Resume[] = [
     resumePath: "/resumes/resume_01.pdf",
     feedback: {
       overallScore: 85,
+      jobTitle: "Frontend Developer",
+      jobDescription: "Frontend Developer",
+      issues: 3,
       ATS: {
         score: 90,
         tips: [],
@@ -37,6 +40,9 @@ export const resumes: Resume[] = [
     resumePath: "/resumes/resume_02.pdf",
     feedback: {
       overallScore: 55,
+      jobTitle: "Cloud Engineer",
+      jobDescription: "Cloud Engineer",
+      issues: 13,
       ATS: {
         score: 90,
         tips: [],
@@ -67,6 +73,9 @@ export const resumes: Resume[] = [
     resumePath: "/resumes/resume_03.pdf",
     feedback: {
       overallScore: 75,
+      jobTitle: "iOS Developer",
+      jobDescription: "iOS Developer",
+      issues: 4,
       ATS: {
         score: 90,
         tips: [],
