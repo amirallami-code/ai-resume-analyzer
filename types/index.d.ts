@@ -15,6 +15,9 @@ interface Job {
   }
   
   interface Feedback {
+    issues: number;
+    jobTitle: string;
+    jobDescription: string;
     overallScore: number;
     ATS: {
       score: number;

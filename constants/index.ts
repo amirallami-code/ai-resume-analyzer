@@ -96,6 +96,7 @@ export const AIResponseFormat = `
       overallScore: number; //max 100
       jobTitle: string;
       jobDescription: string;
+      issues: number;
       ATS: {
         score: number; //rate based on ATS suitability
         tips: {

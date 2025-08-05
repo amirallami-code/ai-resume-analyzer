@@ -3,6 +3,7 @@ import { usePuterStore } from "~/lib/puter";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router";
 import Summary from "~/components/Summary";
+import ATS from "~/components/ATS";
 import Details from "~/components/Details";
 
 
@@ -79,9 +80,9 @@ const Resume = () => {
             </nav>
 
             <div className="flex flex-row w-full max-lg:flex-col-reverse">
-                <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover h-[100vh] sticky top-0 items-center justify-center">
+                <section className="feedback-section bg-[url('/images/bg-small.svg')] bg-cover min-h-[50vh] md:h-[100vh] sticky top-0 items-center justify-center">
                     {imageUrl && resumeUrl && (
-                        <div className="animate-in fade-in duration-1000 gradient-border max-sm:m-0 md:h-[90%] max-wxl:h-fit w-fit">
+                        <div className="animate-in fade-in duration-1000 gradient-border !p-2.5 max-sm:m-0 md:h-[90%] max-wxl:h-fit w-fit">
                             <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
                                 <img
                                     src={imageUrl}
@@ -101,7 +102,7 @@ const Resume = () => {
                             <Details feedback={feedback}/>
                         </div>
                     ) : (
-                        <img src="/images/resume-scan-2.gif" alt="Scanning..." className="w-full" />
+                        <img src="/images/resume-scan-2.gif" alt="Scanning..." className="w-full md:w-1/2 m-auto" />
                     )}
                 </section>
             </div>
