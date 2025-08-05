@@ -28,7 +28,7 @@ main {
   @apply min-h-screen pt-10;
 }
 h1 {
-  @apply max-sm:text-3xl text-5xl lg:text-6xl  text-gradient leading-tight xl:tracking-[-2px] font-semibold;
+  @apply max-w-2xl max-sm:text-3xl text-5xl text-gradient leading-tight xl:tracking-[-2px] font-semibold;
 }
 
 h2 {
@@ -64,7 +64,7 @@ form {
     @apply absolute content-['*'] h-full w-4 text-2xl my-auto text-red-600;
   }
   .progress-bar {
-    @apply w-full max-w-48 bg-gray-200 rounded-full h-2 dark:bg-gray-200 animate-in fade-in;
+    @apply w-full max-w-56 md:max-w-96 bg-gray-200 rounded-full h-2 animate-in fade-in;
   }
   .progress-bar > div {
     @apply bg-[#606beb] h-2 rounded-full duration-1000;
@@ -91,7 +91,7 @@ form {
     @apply flex flex-col items-center gap-8 pt-8 md:pt-12 max-sm:mx-4 mx-15 pb-5;
   }
   .page-heading {
-    @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4 py-1 md:py-6;
+    @apply flex flex-col items-center gap-8 max-w-4xl text-center max-sm:gap-4 py-1 md:py-2;
   }
   .resumes-section {
     @apply flex flex-wrap max-md:flex-col max-md:gap-4 gap-8 items-start max-md:items-center w-full max-w-[1250px] justify-evenly;

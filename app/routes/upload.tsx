@@ -7,6 +7,11 @@ import {convertPdfToImage} from "~/lib/pdfToImage";
 import {formatSize, generateUUID} from "~/lib/utils";
 import {prepareInstructions} from "../../constants";
 
+export async function loader() {
+    await new Promise((res) => setTimeout(res, 1500)); // Simulate 1.5s loading
+    return null;
+}
+
 const Upload = () => {
     const { auth, isLoading, fs, ai, kv } = usePuterStore();
     const navigate = useNavigate();
@@ -71,7 +76,7 @@ const Upload = () => {
         setLoadingStatus(75);
 
         // Stage 6
-        setStatusText('Analysis complete, redirecting...');
+        setStatusText('Redirecting...');
         setLoadingStatus(100);
         console.log(data);
         navigate(`/resume/${uuid}`);
@@ -98,15 +103,15 @@ const Upload = () => {
 
             <section className="main-section">
                 <div className="page-heading">
-                    <h1>Smart feedback for your dream job</h1>
+                    <h1 className="!max-w-lg">Smart feedback for your dream job</h1>
                     {isProcessing ? (
-                        <>
+                        <div className="h-full w-full flex flex-col gap-6 items-center mt-7">
                             <h2>{statusText}</h2>
                             <div className="progress-bar">
                                 <div style={{ width: `${loadingStatus}%` }}></div>
                             </div>
-                            <img src="/images/resume-scan.gif" className="w-full md:max-w-48"/>
-                        </>
+                            {/*<img src="/images/resume-scan.gif" className="w-full md:max-w-48" />*/}
+                        </div>
                     ) : (
                         <h2>Drop your resume for an ATS score and improvement tips</h2>
                     )}
