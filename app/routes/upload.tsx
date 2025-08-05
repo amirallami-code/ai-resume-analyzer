@@ -7,11 +7,6 @@ import {convertPdfToImage} from "~/lib/pdfToImage";
 import {formatSize, generateUUID} from "~/lib/utils";
 import {prepareInstructions} from "../../constants";
 
-export async function loader() {
-    await new Promise((res) => setTimeout(res, 1500)); // Simulate 1.5s loading
-    return null;
-}
-
 const Upload = () => {
     const { auth, isLoading, fs, ai, kv } = usePuterStore();
     const navigate = useNavigate();
