@@ -12,29 +12,29 @@ The AI Resume Analyzer is a modern web application designed to bridge the gap be
 
 ## ✨ Key Features
 
-### 🔐 **Seamless Authentication**
+#### 🔐 **Seamless Authentication**
 - Browser-based authentication system
 - Secure user sessions without complex backend setup
 - Privacy-focused user management
 
-### 📁 **Resume Management**
+#### 📁 **Resume Management**
 - Upload and store multiple resumes securely
 - Organize resumes in a centralized dashboard
 - Support for various document formats
 
-### 🤖 **AI-Powered Analysis**
+#### 🤖 **AI-Powered Analysis**
 - Intelligent resume-to-job matching algorithms
 - Comprehensive ATS compatibility scoring
 - Detailed feedback and improvement suggestions
 - Custom analysis tailored to specific job listings
 
-### 🎨 **Modern User Experience**
+#### 🎨 **Modern User Experience**
 - Clean, intuitive interface design
 - Fully responsive across all devices
 - Consistent UI components for seamless navigation
 - Fast loading times and smooth interactions
 
-### 🔧 **Developer-Friendly Architecture**
+#### 🔧 **Developer-Friendly Architecture**
 - Modular, reusable component structure
 - Type-safe development with TypeScript
 - Efficient state management
