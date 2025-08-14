@@ -23,8 +23,8 @@ const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imagePath }
         <Link to={`/resume/${id}`} className="resume-card animate-in fade-in duration-1000">
             <div className="resume-card-header">
                 <div className="flex flex-col gap-2 pt-2">
-                    {companyName && <h2 className="!text-black font-bold break-words">{companyName}</h2>}
-                    <h3 className="text-base break-words text-gray-500">{jobTitle && "Resume"}</h3>
+                    {companyName && <h3 className="!text-black font-bold break-words">{companyName}</h3>}
+                    <h2 className="!text-base font-semibold break-words text-black">{jobTitle}</h2>
                 </div>
                 <div className="flex-shrink-0">
                     <ScoreCircle score={feedback.overallScore} />

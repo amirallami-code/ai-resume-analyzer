@@ -47,7 +47,6 @@ const Resume = () => {
 
             setFeedback(data.feedback);
             setJobTitle(data.jobTitle);
-            console.log({resumeUrl, imageUrl, feedback: data.feedback });
         }
 
         loadResume();

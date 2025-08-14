@@ -1,4 +1,4 @@
-import {type FormEvent, useState} from 'react'
+import {type FormEvent, useEffect, useState} from 'react'
 import Navbar from "~/components/Navbar";
 import FileUploader from "~/components/FileUploader";
 import {usePuterStore} from "~/lib/puter";
@@ -14,6 +14,10 @@ const Upload = () => {
     const [statusText, setStatusText] = useState('');
     const [file, setFile] = useState<File | null>(null);
     const [loadingStatus, setLoadingStatus] = useState(0);
+
+    useEffect(() => {
+        if(!auth.isAuthenticated) navigate('/auth?next=/');
+    }, [auth.isAuthenticated])
 
     const handleFileSelect = (file: File | null) => {
         setFile(file)
@@ -54,16 +58,25 @@ const Upload = () => {
         setLoadingStatus(60);
 
         // Stage 5
-        setStatusText('Analyzing...');
-        const feedback = await ai.feedback(
-            uploadedFile.path,
-            prepareInstructions({ jobTitle, jobDescription })
-        )
-        if (!feedback) return setStatusText('Error: Failed to analyze resume');
+        setStatusText("Analyzing...");
+        let feedback: any = null;
 
-        const feedbackText = typeof feedback.message.content === 'string'
-            ? feedback.message.content
-            : feedback.message.content[0].text;
+        try {
+            feedback = await ai.feedback(
+                uploadedFile.path,
+                prepareInstructions({ jobTitle, jobDescription })
+            );
+        } catch (err: any) {
+            console.error("AI API call failed:", err);
+            setStatusText("Error: Unable to contact the AI service. Please try again later.");
+            setLoadingStatus(0);
+            return;
+        }
+
+        const feedbackText =
+            typeof feedback.message.content === "string"
+                ? feedback.message.content
+                : feedback.message.content[0]?.text ?? "";
 
         data.feedback = JSON.parse(feedbackText);
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
